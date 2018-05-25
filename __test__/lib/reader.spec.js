@@ -6,23 +6,22 @@ describe('Reader Module', () => {
   
   it('returns error when given a bad file name', (done) => {
   
-    let file = 'bad.txt';
   
-    read(file, (err) => {
-      expect(err).toThrowError();
+    read(['data/bad.txt'], (err) => {
+      expect(err).not.toBeNull();
+      done();
     });
-    done();
   });
 
 
   it('returns an error for any non existent file', (done) => {
 
 
-    read('data/letters.txt', 'data/missing.txt', (err) => {
+    read(['data/letters.txt', 'data/missing.txt'], (err) => {
 
       expect(err).not.toBeNull();
+      done();
     });
-    done();
   });
 
 
@@ -31,15 +30,15 @@ describe('Reader Module', () => {
 
     let expected = 'words words words words words';
 
-    read('data/words.txt', (err, words) => {
+    read(['data/words.txt'], (err, words) => {
       expect(err).toBeNull();
 
       const actual = words[0].toString();
 
       expect(actual).toBe(expected);
 
+      done();
     });
-    done();
   });
 
 
@@ -47,50 +46,51 @@ describe('Reader Module', () => {
 
     let paths = ['data/ipsum.txt', 'data/words.txt', 'data/letters.txt'];
 
-    let path = '';
-    let textArr = [];
-    paths.forEach((ele) => {
-      path = ele.toString();
-      read(path, (err, data) => {
-        textArr.push(data);
-        console.log(textArr[1]);
-        expect(textArr[0]).toContain('ipsum');
-        expect(textArr[1]).toContain('words');
-        expect(textArr[2]).toContain('abcde');
-      });
+    read(paths, (err, data) => {
+      // console.log(data[0]);
+      console.log(data[1]);
+      console.log(data[2]);
+      expect(err).toBeNull();
+      // expect(data[0]).toContain('Lorem');
+      expect(data[1]).toContain('words');
+      expect(data[2]).toContain('abcde');
       done();
     });
+    // });
 
     // let paths = [];
 
     // for( let item of ['ipsum', 'words', 'letters']) {
-    //   paths.push(`data/'${item}'.txt`);
+    //   paths.push(`data/${item}.txt`);
     // }
+    // console.log(paths);
 
     // let expected, actual;
 
     // read(paths, (err, contents) => {
 
     //   expect(err).toBeNull();
-
+      
     //   expected = true;
-    //   actual = contents[0].toString().toContain('ipsum');
+    //   actual = contents[0].startsWith('Lorem');
+    //   console.log(actual);
     //   expect(actual).toBe(expected);
-
+      
     //   expected = 'words words words words words';
-    //   actual = contents[1].toString();
+    //   actual = contents[1];
+    //   console.log(actual);
     //   expect(actual).toBe(expected);
-
+      
     //   expected = 'abcdefghijklmnopqrstuvwxyz';
-    //   actual = contents[2].toString();
+    //   actual = contents[2];
     //   expect(actual).toBe(expected);
+      
+      
+    //   done();
 
-    // });
-    // done();
   });
 
 
 });
-
 
 
