@@ -47,49 +47,15 @@ describe('Reader Module', () => {
     let paths = ['data/ipsum.txt', 'data/words.txt', 'data/letters.txt'];
 
     read(paths, (err, data) => {
-      // console.log(data[0]);
-      console.log(data[1]);
-      console.log(data[2]);
+      // console.log(data);
       expect(err).toBeNull();
-      // expect(data[0]).toContain('Lorem');
+      expect(data[0]).toContain('Lorem');
       expect(data[1]).toContain('words');
       expect(data[2]).toContain('abcde');
       done();
     });
-    // });
-
-    // let paths = [];
-
-    // for( let item of ['ipsum', 'words', 'letters']) {
-    //   paths.push(`data/${item}.txt`);
-    // }
-    // console.log(paths);
-
-    // let expected, actual;
-
-    // read(paths, (err, contents) => {
-
-    //   expect(err).toBeNull();
-      
-    //   expected = true;
-    //   actual = contents[0].startsWith('Lorem');
-    //   console.log(actual);
-    //   expect(actual).toBe(expected);
-      
-    //   expected = 'words words words words words';
-    //   actual = contents[1];
-    //   console.log(actual);
-    //   expect(actual).toBe(expected);
-      
-    //   expected = 'abcdefghijklmnopqrstuvwxyz';
-    //   actual = contents[2];
-    //   expect(actual).toBe(expected);
-      
-      
-    //   done();
 
   });
-
 
 });
 
